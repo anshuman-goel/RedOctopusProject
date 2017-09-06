@@ -1,17 +1,17 @@
-<b>Claims Document</b>
+Claims Document
 
-<b>Team Name:</b>
+Team Name:
     Red Octopus
 
-<b>Team Members:</b>
+Team Members:
 		Anshuman Goel - 	agoel5
 		Rachit Thirani - 	rthiran
 		Vivek Nadimpalli - 	vvnadimp
 
-<b>Project Description:</b>
+Project Description:
 The goal of the project is to build a scalable system which stores and processes massive amounts of data efficiently. To process large amount of data efficiently can help us to provide quick and real-time insights about the data.
 
-<b>Claims for the Project:</b>
+Claims for the Project:
 1.  Storing CSV formatted data into a distributed environment possibly in a NoSQL Database.
 2.  To perform an inner join between tables.
 3.  Generating Key Value pair and performing Map-Reduce operations on it.
