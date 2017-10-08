@@ -11,17 +11,39 @@ import decimal
 # Connent to the kinesis stream
 kinesis = boto3.client("kinesis")
 shard_id = 'shardId-000000000000'  # only one shard
-shard_it = kinesis.get_shard_iterator(
-    StreamName="twitter", ShardId=shard_id, ShardIteratorType="LATEST")["ShardIterator"]
+shard_it = kinesis.get_shard_iterator(StreamName="twitter", ShardId=shard_id, ShardIteratorType="LATEST")["ShardIterator"]
 
 dynamodb = boto3.resource('dynamodb')
+# table = dynamodb.create_table(
+#     TableName='hashtags',
+#     KeySchema=[
+#         {
+#             'AttributeName': 'hashtag',
+#             'KeyType': 'HASH'
+#         }
+#     ],
+#     AttributeDefinitions=[
+#         {
+#             'AttributeName': 'hashtag',
+#             'AttributeType': 'S'
+#         }
+#
+#     ],
+#     # pricing determined by ProvisionedThroughput
+#     ProvisionedThroughput={
+#         'ReadCapacityUnits': 5,
+#         'WriteCapacityUnits': 5
+#     }
+# )
+# table.meta.client.get_waiter('table_exists').wait(TableName='hashtags')
 table = dynamodb.Table('hashtags')
 
 while 1 == 1:
     out = kinesis.get_records(ShardIterator=shard_it, Limit=100)
     for record in out['Records']:
-        if 'entities' in json.loads(record['Data']):
-            htags = json.loads(record['Data'])['entities']['hashtags']
+        tweet_text=record['Data'].decode('utf-8')
+        if 'entities' in json.loads(tweet_text):
+            htags = json.loads(tweet_text)['entities']['hashtags']
             if htags:
                 for ht in htags:
                     htag = ht['text']
