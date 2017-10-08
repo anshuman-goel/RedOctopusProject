@@ -14,28 +14,6 @@ shard_id = 'shardId-000000000000'  # only one shard
 shard_it = kinesis.get_shard_iterator(StreamName="twitter", ShardId=shard_id, ShardIteratorType="LATEST")["ShardIterator"]
 
 dynamodb = boto3.resource('dynamodb')
-# table = dynamodb.create_table(
-#     TableName='hashtags',
-#     KeySchema=[
-#         {
-#             'AttributeName': 'hashtag',
-#             'KeyType': 'HASH'
-#         }
-#     ],
-#     AttributeDefinitions=[
-#         {
-#             'AttributeName': 'hashtag',
-#             'AttributeType': 'S'
-#         }
-#
-#     ],
-#     # pricing determined by ProvisionedThroughput
-#     ProvisionedThroughput={
-#         'ReadCapacityUnits': 5,
-#         'WriteCapacityUnits': 5
-#     }
-# )
-# table.meta.client.get_waiter('table_exists').wait(TableName='hashtags')
 table = dynamodb.Table('hashtags')
 
 while 1 == 1:
