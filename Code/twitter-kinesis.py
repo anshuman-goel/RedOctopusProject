@@ -17,7 +17,7 @@ api = TwitterAPI(consumer_key, consumer_secret, access_token_key, access_token_s
 kinesis = boto3.client('kinesis')
 
 while (1):
-    r = api.request('statuses/user_timeline', {'count':200})
+    r = api.request('statuses/filter', {'locations':'-180,-90,180,90'})
     tweets = []
     count = 0
     for item in r:
