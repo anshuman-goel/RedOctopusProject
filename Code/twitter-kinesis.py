@@ -35,13 +35,8 @@ class TwitterDataProducer (threading.Thread):
                 tweet_buffer.append({'Data':jsonItem, 'PartitionKey':"filler"})
                 self.count += 1
                 # place the data into a global buffer shared among producer and all consumers
-                #mutex.acquire()
                 if len(tweet_buffer) >= MAX_BUFF_LEN:
                     del tweet_buffer[0]
-                    print "producer: deleting entry..."
-
-
-                #mutex.release()
 
 
 class TwitterDataConsumer (threading.Thread):
@@ -54,11 +49,9 @@ class TwitterDataConsumer (threading.Thread):
         global tweet_buffer
         tweet_record = []
         print "Consumer started..."
-        cnt = 0
-        size = 0
+        
         while (1):
             # check if the buffer has atleast one tweet to read
-            #mutex.acquire()
             if len(tweet_buffer) != 0:
                 
                 # read the tweet and remove from the buffer
@@ -67,13 +60,7 @@ class TwitterDataConsumer (threading.Thread):
                 # push the tweet into aws kinesis
                 #print "consumer reading data from buffer and pushing into kinesis..."
                 self.kinesis.put_records(StreamName="twitter", Records=tweet_record)
-                cnt += 1
-                size += sys.getsizeof(tweet_record)
-                if cnt == 1500:
-                    print size
-                    cnt = 0
                 del tweet_record[0]
-            #mutex.release()
 
 
 
