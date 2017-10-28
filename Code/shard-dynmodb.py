@@ -10,16 +10,17 @@ import decimal
 
 # Connent to the kinesis stream
 kinesis = boto3.client("kinesis")
-shard_id = 'shardId-000000000000'  # only one shard
+shard_id = 'shardId-000000000001'  # only one shard
 shard_it = kinesis.get_shard_iterator(StreamName="twitter", ShardId=shard_id, ShardIteratorType="LATEST")["ShardIterator"]
 
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table('hashtags')
 
-while 1 == 1:
+while True:
     out = kinesis.get_records(ShardIterator=shard_it, Limit=100)
     for record in out['Records']:
         tweet_text=record['Data'].decode('utf-8')
+	#print tweet_text
         if 'entities' in json.loads(tweet_text):
             htags = json.loads(tweet_text)['entities']['hashtags']
             if htags:
