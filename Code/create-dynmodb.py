@@ -6,23 +6,15 @@ table = dynamodb.create_table(
     TableName='Twitter',
     KeySchema=[
         {
-            'AttributeName': 'id_str',
+            'AttributeName': 'SequenceNumber',
             'KeyType': 'HASH',
-        },
-        {
-            'AttributeName': 'id',
-            'KeyType': 'RANGE',
         }
     ],
     AttributeDefinitions=[
         {
-            'AttributeName': 'id_str',
+            'AttributeName': 'SequenceNumber',
             'AttributeType': 'S',
-        },
-        {
-            'AttributeName': 'id',
-            'AttributeType': 'S',
-        },
+        }
     ],
     # pricing determined by ProvisionedThroughput
     ProvisionedThroughput={

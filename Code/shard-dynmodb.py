@@ -1,5 +1,4 @@
-# script to read data from Kinesis, extract hashtags and store into
-# dynamoDB
+# script to read data from Kinesis, extract dat and store into dynamoDB
 
 import boto3
 import time
@@ -18,7 +17,7 @@ table = dynamodb.Table('Twitter')
 
 while True:
     out = kinesis.get_records(ShardIterator=shard_it, Limit=100)
-    #print(out['Records'])
+    # print(out['Records'])
     for record in out['Records']:
         tweet_record = json.loads(record['Data'].decode('utf-8'))
         # print(record['Data'])
@@ -48,38 +47,28 @@ while True:
                                 #print(tweet_place['country'] .encode('utf8'))
                                 if tweet_place['country'] is not None and tweet_place['country_code'] is not None \
                                 and tweet_place['full_name'] is not None and tweet_place['place_type'] is not None:
-                                    print(tweet_place['place_type'] .encode('utf8'))
+                                    table.put_item(
+                                        Item={
+                                            'SequenceNumber': record['SequenceNumber'],
+                                            'id_str': tweet_record['id_str'],
+                                            'text': tweet_record['text'],
+                                            'lang': tweet_record['lang'],
+                                            'source': tweet_record['source'],
+                                            'id': tweet_user['id'],
+                                            'name': tweet_user['name'],
+                                            'time_zone': tweet_user['time_zone'],
+                                            'friends_count': tweet_user['friends_count'],
+                                            'screen_name': tweet_user['screen_name'],
+                                            'statuses_count': tweet_user['statuses_count'],
+                                            'favourites_count': tweet_user['favourites_count'],
+                                            'description': tweet_user['description'],
+                                            'country': tweet_place['country'],
+                                            'country_code': tweet_place['country_code'],
+                                            'full_name': tweet_place['full_name'],
+                                            'place_type': tweet_place['place_type'],
+                                        })
+                                    # print(tweet_place['place_type'] .encode('utf8'))
     # Refer http://boto3.readthedocs.io/en/latest/guide/dynamodb.html for pushing data in DynamoDB
-    """tweet_text=record['Data'].encode('unicode_escape')#decode('utf-8')
-        #print(tweet_text)
-        if 'text' in json.loads(tweet_text):
-            text = json.loads(tweet_text)['text']
-            print(text)
-        if 'entities' in json.loads(tweet_text):
-            htags = json.loads(tweet_text)['entities']['hashtags']
-            if htags:
-                for ht in htags:
-                    htag = ht['text']
-                    checkItemExists = table.get_item(Key={'hashtag':htag})
-                    if 'Item' in checkItemExists:
-                        response = table.update_item(Key={'hashtag': htag},
-							UpdateExpression="set htCount  = htCount + :val",
-							ConditionExpression="attribute_exists(hashtag)",
-							ExpressionAttributeValues={
-								':val': decimal.Decimal(1)
-							},
-							ReturnValues="UPDATED_NEW"
-						)
-                    else:
-                                		response = table.update_item(
-                                        		Key={
-                                                		'hashtag': htag
-                                        		},
-                                        		UpdateExpression="set htCount = :val",
-                                        		ExpressionAttributeValues={
-                                                		':val': decimal.Decimal(1)
-                                        		},
-                                        		ReturnValues="UPDATED_NEW"
-                                		)"""
+    print("Working fine...")
     shard_it = out["NextShardIterator"]
-    time.sleep(1.0)
+    time.sleep(0.25)
