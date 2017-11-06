@@ -9,7 +9,8 @@ import decimal
 
 # Connent to the kinesis stream
 kinesis = boto3.client("kinesis")
-shard_id = 'shardId-000000000001'  # only one shard
+#print kinesis.describe_stream(StreamName="twitter")
+shard_id = 'shardId-000000000003'  # only one shard
 shard_it = kinesis.get_shard_iterator(StreamName="twitter", ShardId=shard_id, ShardIteratorType="LATEST")["ShardIterator"]
 
 dynamodb = boto3.resource('dynamodb')
