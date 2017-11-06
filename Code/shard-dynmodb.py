@@ -69,7 +69,7 @@ class ReadDataFromShard (threading.Thread):
                                                     'full_name': tweet_place['full_name'],
                                                     'place_type': tweet_place['place_type'],
                                                 })
-                                            print(tweet_place['place_type'] .encode('utf8'))
+                                            # print(tweet_place['place_type'] .encode('utf8'))
             # Refer http://boto3.readthedocs.io/en/latest/guide/dynamodb.html for pushing data in DynamoDB
             print("Working fine...")
             self.shard_it = out["NextShardIterator"]
