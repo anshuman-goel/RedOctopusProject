@@ -70,7 +70,7 @@ class TwitterDataConsumer (threading.Thread):
 def main():
 
     ## twitter credentials
-
+    global sleep_time
     consumer_key = twitterCreds.consumer_key
     consumer_secret = twitterCreds.consumer_secret
     access_token_key = twitterCreds.access_token_key
