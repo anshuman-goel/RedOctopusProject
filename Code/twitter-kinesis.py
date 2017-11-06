@@ -4,9 +4,12 @@ import twitterCreds
 import threading, time
 from threading import Thread
 import sys, urllib3, http
+from random import *
 
 MAX_BUFF_LEN = 15000
 tweet_buffer = []
+
+sleep_time = 0
 
 class TwitterDataProducer (threading.Thread):
     def __init__(self, api, kinesis):
@@ -59,6 +62,7 @@ class TwitterDataConsumer (threading.Thread):
                 #print "consumer reading data from buffer and pushing into kinesis..."
                 self.kinesis.put_records(StreamName="twitter", Records=tweet_record)
                 # del tweet_record[0]
+            time.sleep(sleep_time)
 
 
 
@@ -75,7 +79,7 @@ def main():
     api = TwitterAPI(consumer_key, consumer_secret, access_token_key, access_token_secret)
 
     kinesis = boto3.client('kinesis')
-
+    sleep_time = randint(1, 3)
     producer = TwitterDataProducer(api, kinesis)
     producer.start()
     if len(sys.argv) > 1:
