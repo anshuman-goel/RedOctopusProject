@@ -10,7 +10,7 @@ import threading
 import time
 from threading import Thread
 import sys
-
+import httplib
 
 MAX_BUFF_LEN = 15000
 tweet_buffer = []
@@ -24,19 +24,22 @@ class TwitterDataProducer (threading.Thread):
         self.kinesis = kinesis
     def run(self):
         global tweet_buffer
-        print "Producer started..."
+        print("Producer started...")
         while (1):
-            r = self.api.request('statuses/filter', {'locations':'-180,-90,180,90'})
-            self.tweets = []
-            self.count = 0
-            for item in r:
-                jsonItem = json.dumps(item)
-                #self.tweets.append({'Data':jsonItem, 'PartitionKey':"filler"})
-                tweet_buffer.append({'Data':jsonItem, 'PartitionKey':"filler"})
-                self.count += 1
-                # place the data into a global buffer shared among producer and all consumers
-                if len(tweet_buffer) >= MAX_BUFF_LEN:
-                    del tweet_buffer[0]
+            try:
+                r = self.api.request('statuses/filter', {'locations':'-180,-90,180,90'})
+                self.tweets = []
+                self.count = 0
+                for item in r:
+                    jsonItem = json.dumps(item)
+                    #self.tweets.append({'Data':jsonItem, 'PartitionKey':"filler"})
+                    tweet_buffer.append({'Data':jsonItem, 'PartitionKey':"filler"})
+                    self.count += 1
+                    # place the data into a global buffer shared among producer and all consumers
+                    if len(tweet_buffer) >= MAX_BUFF_LEN:
+                        del tweet_buffer[0]
+            except httplib.IncompleteRead, e:
+                continue
 
 
 class TwitterDataConsumer (threading.Thread):
@@ -48,7 +51,7 @@ class TwitterDataConsumer (threading.Thread):
     def run(self):
         global tweet_buffer
         tweet_record = []
-        print "Consumer started..."
+        print("Consumer started...")
         
         while (1):
             # check if the buffer has atleast one tweet to read
