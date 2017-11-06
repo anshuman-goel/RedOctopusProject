@@ -1,16 +1,9 @@
-## Example to use twitter api and feed data into kinesis
-
 from TwitterAPI import TwitterAPI
-import boto3
-import json
+import boto3, json
 import twitterCreds
-
-
-import threading
-import time
+import threading, time
 from threading import Thread
-import sys
-import httplib
+import sys, urllib3
 
 MAX_BUFF_LEN = 15000
 tweet_buffer = []
@@ -22,6 +15,7 @@ class TwitterDataProducer (threading.Thread):
         self.tweets = []
         self.api = api
         self.kinesis = kinesis
+        
     def run(self):
         global tweet_buffer
         print("Producer started...")
@@ -38,7 +32,7 @@ class TwitterDataProducer (threading.Thread):
                     # place the data into a global buffer shared among producer and all consumers
                     if len(tweet_buffer) >= MAX_BUFF_LEN:
                         del tweet_buffer[0]
-            except httplib.IncompleteRead, e:
+            except urllib3.exceptions.ProtocolError as e:
                 continue
 
 
@@ -48,22 +42,23 @@ class TwitterDataConsumer (threading.Thread):
         self.tweet_record = []
         self.api = api
         self.kinesis = kinesis
+
     def run(self):
         global tweet_buffer
         tweet_record = []
         print("Consumer started...")
-        
+
         while (1):
             # check if the buffer has atleast one tweet to read
             if len(tweet_buffer) != 0:
-                
+                tweet_record = []
                 # read the tweet and remove from the buffer
                 tweet_record.append(tweet_buffer[0])
                 #del tweet_buffer[0]
                 # push the tweet into aws kinesis
                 #print "consumer reading data from buffer and pushing into kinesis..."
                 self.kinesis.put_records(StreamName="twitter", Records=tweet_record)
-                del tweet_record[0]
+                # del tweet_record[0]
 
 
 
@@ -83,7 +78,10 @@ def main():
 
     producer = TwitterDataProducer(api, kinesis)
     producer.start()
-    num_consumers = int(sys.argv[1])
+    if len(sys.argv) > 1:
+        num_consumers = int(sys.argv[1])
+    else:
+        num_consumers = 10
     for i in range(num_consumers):
         consumer = TwitterDataConsumer(api, kinesis)
         consumer.start()
