@@ -62,7 +62,7 @@ class TwitterDataConsumer (threading.Thread):
                 #print "consumer reading data from buffer and pushing into kinesis..."
                 self.kinesis.put_records(StreamName="twitter", Records=tweet_record)
                 # del tweet_record[0]
-            time.sleep(sleep_time)
+                time.sleep(random())
 
 
 
@@ -70,7 +70,6 @@ class TwitterDataConsumer (threading.Thread):
 def main():
 
     ## twitter credentials
-    global sleep_time
     consumer_key = twitterCreds.consumer_key
     consumer_secret = twitterCreds.consumer_secret
     access_token_key = twitterCreds.access_token_key
@@ -79,7 +78,6 @@ def main():
     api = TwitterAPI(consumer_key, consumer_secret, access_token_key, access_token_secret)
 
     kinesis = boto3.client('kinesis')
-    sleep_time = randint(1, 3)
     producer = TwitterDataProducer(api, kinesis)
     producer.start()
     if len(sys.argv) > 1:
