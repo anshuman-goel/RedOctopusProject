@@ -37,6 +37,6 @@ if __name__ == "__main__":
     rdd_name = sc.textFile('hdfs:///user/hadoop/hive-test/000000_0').map(f).collect()
 =======
     rdd_name = sc.textFile('hdfs://rachittwittertest/000000_0').map(f).collect()
->>>>>>> Update emr.py
+>>>>>>> cc784d498c1a2537fe62cca2e1b6c5554d0f9fb0
     print rdd_name
     sc.stop()
