@@ -5,6 +5,7 @@ import threading, time
 from threading import Thread
 import sys, urllib3, http
 from random import *
+import twitter
 
 MAX_BUFF_LEN = 15000
 tweet_buffer = []
