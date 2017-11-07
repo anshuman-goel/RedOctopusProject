@@ -62,7 +62,7 @@ class TwitterDataConsumer (threading.Thread):
                 #print "consumer reading data from buffer and pushing into kinesis..."
                 self.kinesis.put_records(StreamName="twitter", Records=tweet_record)
                 # del tweet_record[0]
-                time.sleep(random())
+                #time.sleep(random())
 
 
 
