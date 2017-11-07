@@ -5,6 +5,7 @@ import threading, time
 from threading import Thread
 import sys, urllib3, http
 from random import *
+import twitter
 
 MAX_BUFF_LEN = 15000
 tweet_buffer = []
@@ -35,7 +36,8 @@ class TwitterDataProducer (threading.Thread):
                     # place the data into a global buffer shared among producer and all consumers
                     if len(tweet_buffer) >= MAX_BUFF_LEN:
                         del tweet_buffer[0]
-            except (urllib3.exceptions.ProtocolError, http.client.IncompleteRead) as e:
+            except (urllib3.exceptions.ProtocolError, http.client.IncompleteRead, twitter.error.TwitterError) as e:
+                print(e.message)
                 continue
 
 
