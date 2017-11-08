@@ -36,13 +36,14 @@ class TwitterDataProducer (threading.Thread):
                     if len(tweet_buffer) >= MAX_BUFF_LEN:
                         del tweet_buffer[0]
             except (urllib3.exceptions.ProtocolError, http.client.IncompleteRead) as e:
+                print(e)
                 continue
 
 
 class TwitterDataConsumer (threading.Thread):
     def __init__(self, api, kinesis):
         threading.Thread.__init__(self)
-        self.tweet_record = []
+        # self.tweet_record = []
         self.api = api
         self.kinesis = kinesis
 
@@ -50,19 +51,28 @@ class TwitterDataConsumer (threading.Thread):
         global tweet_buffer
         tweet_record = []
         print("Consumer started...")
-
+        i=0
         while (1):
             # check if the buffer has atleast one tweet to read
-            if len(tweet_buffer) != 0:
-                tweet_record = []
+            if len(tweet_buffer) != 0 and len(tweet_buffer) >= i:
+                # tweet_record = []
                 # read the tweet and remove from the buffer
-                tweet_record.append(tweet_buffer[0])
+                tweet_record.append(tweet_buffer[i])
                 #del tweet_buffer[0]
                 # push the tweet into aws kinesis
                 #print "consumer reading data from buffer and pushing into kinesis..."
-                self.kinesis.put_records(StreamName="twitter", Records=tweet_record)
-                # del tweet_record[0]
+                try:
+                    self.kinesis.put_records(StreamName="twitter", Records=tweet_record)
+                except Exception as e:
+                    print(e)
+                    continue
+                del tweet_record[0]
+                i=i+1
                 #time.sleep(random())
+            if i==MAX_BUFF_LEN/2:
+                i=0
+            # if len(tweet_buffer)==0:
+            #     time.sleep(1)
 
 
 

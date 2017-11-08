@@ -49,27 +49,30 @@ class ReadDataFromShard (threading.Thread):
                                         #print(tweet_place['country'] .encode('utf8'))
                                         if tweet_place['country'] is not None and tweet_place['country_code'] is not None \
                                         and tweet_place['full_name'] is not None and tweet_place['place_type'] is not None:
-                                            self.table.put_item(
-                                                Item={
-                                                    'SequenceNumber': record['SequenceNumber'],
-                                                    'id_str': tweet_record['id_str'],
-                                                    'text': tweet_record['text'],
-                                                    'lang': tweet_record['lang'],
-                                                    'source': tweet_record['source'],
-                                                    'id': tweet_user['id'],
-                                                    'name': tweet_user['name'],
-                                                    'time_zone': tweet_user['time_zone'],
-                                                    'friends_count': tweet_user['friends_count'],
-                                                    'screen_name': tweet_user['screen_name'],
-                                                    'statuses_count': tweet_user['statuses_count'],
-                                                    'favourites_count': tweet_user['favourites_count'],
-                                                    'description': tweet_user['description'],
-                                                    'country': tweet_place['country'],
-                                                    'country_code': tweet_place['country_code'],
-                                                    'full_name': tweet_place['full_name'],
-                                                    'place_type': tweet_place['place_type'],
-                                                })
-                                            # print(tweet_place['place_type'] .encode('utf8'))
+                                            try:
+                                                self.table.put_item(
+                                                    Item={
+                                                        'SequenceNumber': record['SequenceNumber'],
+                                                        'id_str': tweet_record['id_str'],
+                                                        'text': tweet_record['text'],
+                                                        'lang': tweet_record['lang'],
+                                                        'source': tweet_record['source'],
+                                                        'id': tweet_user['id'],
+                                                        'name': tweet_user['name'],
+                                                        'time_zone': tweet_user['time_zone'],
+                                                        'friends_count': tweet_user['friends_count'],
+                                                        'screen_name': tweet_user['screen_name'],
+                                                        'statuses_count': tweet_user['statuses_count'],
+                                                        'favourites_count': tweet_user['favourites_count'],
+                                                        'description': tweet_user['description'],
+                                                        'country': tweet_place['country'],
+                                                        'country_code': tweet_place['country_code'],
+                                                        'full_name': tweet_place['full_name'],
+                                                        'place_type': tweet_place['place_type'],
+                                                    })
+                                                print(tweet_place['place_type'] .encode('utf8'))
+                                            except Exception as e:
+                                                    print(e)
             # Refer http://boto3.readthedocs.io/en/latest/guide/dynamodb.html for pushing data in DynamoDB
             print("Working fine...")
             self.shard_it = out["NextShardIterator"]

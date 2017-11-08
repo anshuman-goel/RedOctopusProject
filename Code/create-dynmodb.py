@@ -18,8 +18,8 @@ table = dynamodb.create_table(
     ],
     # pricing determined by ProvisionedThroughput
     ProvisionedThroughput={
-        'ReadCapacityUnits': 5,
-        'WriteCapacityUnits': 5
+        'ReadCapacityUnits': 25,
+        'WriteCapacityUnits': 25
     }
 )
 table.meta.client.get_waiter('table_exists').wait(TableName='Twitter')
