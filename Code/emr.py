@@ -6,7 +6,7 @@
 #CREATE EXTERNAL TABLE twitter_dynamodb(hash string, count bigint) STORED BY 'org.apache.hadoop.hive.dynamodb.DynamoDBStorageHandler' TBLPROPERTIES ("dynamodb.table.name" = "hashtags", "dynamodb.column.mapping" = "hash:hashtag,count:htCount");
 
 #create a table in hdfs where the data has to be copied.
-#create external table hdfs_twitter (hash string, coutn bigint) STORED AS SEQUENCEFILE location 'hdfs://rachittwittertest/'
+#create external table hdfs_twitter (hash string, coutn bigint) STORED AS SEQUENCEFILE location 'hdfs:///rachittwittertest/'
 #do add the way we want the data ot be stored in the file
 
 #copy data from dynamodb to hdfs
@@ -34,9 +34,6 @@ if __name__ == "__main__":
 
     # count = sc.parallelize(xrange(1, n + 1), partitions).map(f).reduce(add)
     #print "Pi is roughly %f" % (4.0 * count / n)
-    rdd_name = sc.textFile('hdfs:///user/hadoop/hive-test/000000_0').map(f).collect()
-=======
-    rdd_name = sc.textFile('hdfs://rachittwittertest/000000_0').map(f).collect()
->>>>>>> cc784d498c1a2537fe62cca2e1b6c5554d0f9fb0
+    rdd_name = sc.textFile('hdfs:///twitter/000000_0').map(f).collect()
     print rdd_name
     sc.stop()
