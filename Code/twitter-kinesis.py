@@ -70,6 +70,7 @@ class TwitterDataConsumer (threading.Thread):
                 del tweet_record[0]
                 i=i+1
                 #time.sleep(random())
+            # add more tweets until half the buffer is full then push to kinesis
             if i==MAX_BUFF_LEN/2:
                 i=0
             # if len(tweet_buffer)==0:
