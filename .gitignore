@@ -2,3 +2,5 @@ rootkey.csv
 CloudBerry Lab*
 *DS_Store
 *pyc
+*.pem
+*.ppk
