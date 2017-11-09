@@ -54,7 +54,7 @@ class TwitterDataConsumer (threading.Thread):
         i=0
         while (1):
             # check if the buffer has atleast one tweet to read
-            if len(tweet_buffer) != 0 and len(tweet_buffer) >= i:
+            if len(tweet_buffer) != 0 and len(tweet_buffer) > i:
                 # tweet_record = []
                 # read the tweet and remove from the buffer
                 tweet_record.append(tweet_buffer[i])
