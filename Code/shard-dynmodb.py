@@ -8,6 +8,9 @@ from global_variables import *
 kinesis = boto3.client("kinesis")
 #print kinesis.describe_stream(StreamName="twitter")
 
+
+
+
 class ReadDataFromShard (threading.Thread):
     def __init__(self, shard_no):
         threading.Thread.__init__(self)

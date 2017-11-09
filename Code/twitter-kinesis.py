@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from TwitterAPI import TwitterAPI
 import boto3, json
 import twitterCreds
@@ -99,21 +98,6 @@ def main():
     for i in range(num_consumers):
         consumer = TwitterDataConsumer(api, kinesis)
         consumer.start()
-
-
-#thread2 = StreamTwitterData(api, kinesis)
-    #thread3 = StreamTwitterData(api, kinesis)
-    #thread4 = StreamTwitterData(api, kinesis)
-
-#thread1.start()
-#thread2.start()
-    #thread3.start()
-    #thread4.start()
-
-#thread1.join()
-#thread2.join()
-    #thread3.join()
-    #thread4.join()
 
 
 if __name__ == "__main__":
