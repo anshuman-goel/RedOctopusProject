@@ -76,7 +76,8 @@ class TwitterDataConsumer (threading.Thread):
             # add more tweets until half the buffer is full then push to kinesis
             if i==100:
                 try:
-                    print(self.kinesis.put_records(StreamName="twitter", Records=tweet_record))
+                    self.kinesis.put_records(StreamName="twitter", Records=tweet_record)
+                    time.sleep(0.11)
                 except Exception as e:
                     print(e)
                     continue
