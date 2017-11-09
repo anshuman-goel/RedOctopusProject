@@ -79,7 +79,7 @@ class ReadDataFromShard (threading.Thread):
             # Refer http://boto3.readthedocs.io/en/latest/guide/dynamodb.html for pushing data in DynamoDB
             print("Working fine...")
             self.shard_it = out["NextShardIterator"]
-            time.sleep(0.25)
+            time.sleep(0.10)
 
 for i in range(shard_count):
     obj = ReadDataFromShard(i)
