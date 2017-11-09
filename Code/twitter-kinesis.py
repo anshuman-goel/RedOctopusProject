@@ -61,16 +61,24 @@ class TwitterDataConsumer (threading.Thread):
                 #del tweet_buffer[0]
                 # push the tweet into aws kinesis
                 #print "consumer reading data from buffer and pushing into kinesis..."
+                '''
                 try:
                     self.kinesis.put_records(StreamName="twitter", Records=tweet_record)
                 except Exception as e:
                     print(e)
                     continue
                 del tweet_record[0]
+                '''
                 i=i+1
                 #time.sleep(random())
             # add more tweets until half the buffer is full then push to kinesis
-            if i==MAX_BUFF_LEN/2:
+            if i==100:
+                try:
+                    self.kinesis.put_records(StreamName="twitter", Records=tweet_record)
+                except Exception as e:
+                    print(e)
+                    continue
+                tweet_record = []
                 i=0
             # if len(tweet_buffer)==0:
             #     time.sleep(1)
