@@ -47,7 +47,7 @@ class ReadDataFromShard (threading.Thread):
                             and tweet_user['favourites_count'] is not None and tweet_user['description'] is not None:
                                 if 'place' in tweet_record.keys():
                                     tweet_place = tweet_record['place']
-                                    if 'country' in tweet_place.keys() and 'country_code' in tweet_place.keys() \
+                                    if tweet_place is not None and 'country' in tweet_place.keys() and 'country_code' in tweet_place.keys() \
                                     and 'full_name' in tweet_place.keys() and 'place_type' in tweet_place.keys():
                                         #print(tweet_place['country'] .encode('utf8'))
                                         if tweet_place['country'] is not None and tweet_place['country_code'] is not None \
@@ -77,7 +77,7 @@ class ReadDataFromShard (threading.Thread):
                                             except Exception as e:
                                                     print(e)
             # Refer http://boto3.readthedocs.io/en/latest/guide/dynamodb.html for pushing data in DynamoDB
-            print("Working fine...")
+            # print("Working fine...")
             self.shard_it = out["NextShardIterator"]
             time.sleep(0.10)
 
