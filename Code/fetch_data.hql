@@ -5,8 +5,3 @@ TBLPROPERTIES ("dynamodb.table.name" = "Twitter", "dynamodb.column.mapping" = "n
 create external table twitter_hdfs (name string) STORED AS SEQUENCEFILE location 'hdfs:///twitter/';
 
 INSERT OVERWRITE TABLE twitter_hdfs SELECT * from twitter_dynamodb;
-
-SELECT word, count(1) AS count FROM
- (SELECT explode(split(name, '\\s')) AS word FROM twitter_hdfs) temp
-GROUP BY word
-ORDER BY count;
