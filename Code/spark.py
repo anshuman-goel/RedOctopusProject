@@ -17,7 +17,8 @@ from random import random
 from operator import add
 
 from pyspark import SparkContext
-
+import time
+start_time=time.time()
 
 if __name__ == "__main__":
     """
@@ -31,3 +32,5 @@ if __name__ == "__main__":
     for (word, count) in output:
         print("%s: %i" % (word.encode('utf-8'), count))
     sc.stop()
+end_time=time.time()
+print ("---%s seconds --- "%(end_time-start_time))
