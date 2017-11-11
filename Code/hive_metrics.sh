@@ -1,12 +1,12 @@
 DATE=$(date +"%Y%m%d_%H%M%S")
 
-LOGFILE="/home/LOG/"$DATE".log"
+LOGFILE="./"$DATE".log"
 
 echo "Executing hive script " >> $LOGFILE
 
 START1=$(date +%s);
 
-hive -f /home/HIVE/hive.hql
+hive -f ./hive.hql
 
 END1=$(date +%s);
 
