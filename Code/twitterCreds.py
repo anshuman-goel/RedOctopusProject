@@ -32,13 +32,13 @@ consumer_key = "YLSNm8CAPsGOxkh9cBqoYZuxX"
 consumer_secret = "BKpJtLC5i4bnlfAq5aiNoNPImmYgIHLRjxfNSTPaaTHVf5jGZW"
 access_token_key = "811951139843375104-OzdV3TVMWaR7sEZpXp1BGWXjmx7G1z4"
 access_token_secret = "jWDkBXcHBvvfAnxFeT5JBAKZnJXICqkrwzrwiajg3FBfS"'''
-
+'''
 # rthiran - 1
 consumer_key = "CCzsaYYCSBw1GACyGlgcHwuPk"
 consumer_secret = "TD1o8eovRJsSaafgmEdn4Ag7AJAcJHQS6uieV6nLeVCAODlqfN"
 access_token_key = "2352880537-rONxPfB1s6jZvrxd9QPVnNLDE36V6xMPZ74DH5c"
 access_token_secret = "npNZMz3eJin3tnDGmgDxFXfykHVfjjkYzBbINVgCHQz8J"
-
+'''
 # rthiran - 2
 consumer_key = "CfRzkbk1fBgnTO3GTYRiwqZE1"
 consumer_secret = "3YICSbi1JTjisbuhJQjgPKvqqJNGO9arGvw5DiSD2ifgBwBKVV"
