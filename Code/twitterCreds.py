@@ -3,12 +3,20 @@
 ## your actual Twitter credentials that one can
 ## obtain/create here: https://apps.twitter.com/
 
-#agoel5
+#agoel5 - 1
 '''
 consumer_key = "91jSFcd0Ae9Jewcl65ZkN5ZxE"
 consumer_secret = "WkVNfI4ritCBTIzf8qAZULmwUANSMUuxcaqU7ITw69QZDHaYwE"
 access_token_key = "53382302-2SRfR9Xfmiq7bahVNHgkYJFHN4xIUQLAZJ1lVE6iu"
 access_token_secret = "UvMPkFFytlkY6gdTHVANbhpafgQ15mgblnQese6wRxgt6"
+'''
+
+#agoel5 - 2
+'''
+consumer_key = "1q5NPTrBivu2yIBWoJE5aCE1R"
+consumer_secret = "gAnZlitBEdTsH9pC8JIT7ohx08tatELZwyOdrCiRJGkipizUh3"
+access_token_key = "53382302-f16gx2uXFqe6qIq2dIk13pAdr8lUOPQ2ApZwhlTaz"
+access_token_secret = "fta7kTCTg0o63DOagGdvP0E3TPbv5eaQr8nX3uHQknTmT"
 '''
 
 # vvnadimp
