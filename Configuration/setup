@@ -9,3 +9,4 @@ sudo pip install --upgrade virtualenv
 sudo pip install TwitterAPI
 sudo pip install boto3
 sudo pip install http
+sudo pip install tmux
