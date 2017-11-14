@@ -16,7 +16,7 @@ class ReadDataFromShard (threading.Thread):
         threading.Thread.__init__(self)
 	if shard_no  <= 9:
             shard_id = 'shardId-00000000000' + str(shard_no)
-	else
+	else:
             shard_id = 'shardId-0000000000' + str(shard_no)
         self.shard_it = kinesis.get_shard_iterator(StreamName="twitter", ShardId=shard_id, ShardIteratorType="LATEST")["ShardIterator"]
         dynamodb = boto3.resource('dynamodb')
