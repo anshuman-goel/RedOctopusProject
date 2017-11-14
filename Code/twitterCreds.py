@@ -26,7 +26,12 @@ consumer_secret = "YQbUtiI3fF3SbkeNX8yjEtkvHg7BEz1JdrTPO7GZkhLAiptHMB"
 access_token_key = "811951139843375104-7lsugkdTI4IPwLWff8GtzvAcvIoIIvS"
 access_token_secret = "8b7VEndwlfg4gHVcucBGo1VjjSb3AgTeScYDEN576LsJy"
 '''
-
+# vvnadimp -2 
+'''
+consumer_key = "YLSNm8CAPsGOxkh9cBqoYZuxX"
+consumer_secret = "BKpJtLC5i4bnlfAq5aiNoNPImmYgIHLRjxfNSTPaaTHVf5jGZW"
+access_token_key = "811951139843375104-OzdV3TVMWaR7sEZpXp1BGWXjmx7G1z4"
+access_token_secret = "jWDkBXcHBvvfAnxFeT5JBAKZnJXICqkrwzrwiajg3FBfS"
 # rthiran
 consumer_key = "CCzsaYYCSBw1GACyGlgcHwuPk"
 consumer_secret = "TD1o8eovRJsSaafgmEdn4Ag7AJAcJHQS6uieV6nLeVCAODlqfN"
