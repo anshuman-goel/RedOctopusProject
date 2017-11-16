@@ -27,7 +27,7 @@ if __name__ == "__main__":
     sc = SparkContext(appName="PythonPi")
     partitions = int(sys.argv[1]) if len(sys.argv) > 1 else 2
     # Ref: https://stackoverflow.com/questions/30787635/takeordered-descending-pyspark
-    output = sc.textFile('hdfs:///twitter/000000_0').flatMap(lambda x: x.split(' ')).map(lambda x: (x, 1)).reduceByKey(add).takeOrdered(100, key = lambda x: -x[1])
+    output = sc.textFile('hdfs:///twitter/000000_0').flatMap(',').map(lambda x:x[9]).flatMap(lambda x: x.split(' ')).map(lambda x: (x, 1)).reduceByKey(add).takeOrdered(100, key = lambda x: -x[1])
     # output = counts.collect()
     for (word, count) in output:
         print("%s: %i" % (word.encode('utf-8'), count))
