@@ -16,7 +16,7 @@ Since the write capacity of writing units in DynamoDB is quite less. A multi-thr
 ### Moving data form DynamoDB to HDFS to apply Map Reduce Task
 Performing operations on DynamoDB directly is costly if one has to perform it multiple times. Also storing large amount of data in DynamoDB can also be costly. Therefore, the data is moved to HDFS from DynamoDB in batches whenever required.
 
-Before moving the data, a cluster is needs to be setup. A total of four nodes of type m1.xlarge were chosen to setup the cluster with large SSD storage of 420 GB at each node.
+Before moving the data, a cluster is needs to be setup. A total of four nodes of type m1.xlarge were chosen to setup the cluster with large SSD storage of 1680 GB at each node.
 
 Amazon recommends using Hive to transfer the data from DynamoDB to HDFS. As one can select the required attributes only and Hive query engine automatically manages the transfer of data according to the number of specified reading units of the DynamoDB so that requests does not throttle. Therefore, an external table is created using hive which is mapped to the data in the DynamoDB table. Another external table was created in HDFS to store the data that will be copied from DynamoDB to HDFS. Thus, Hive knows the structure of the data and it will be very easy to copy only the required data. Finally, using INSERT, data was inserted into the table in HDFS from DynamoDB using Hive.
 
@@ -26,8 +26,9 @@ After transferring the data from DynamoDB to HDFS, data is replicated to increas
 The application developed was restricted to perform only simple analysis on data. The application searches for the most common name that is found among all the users who tweets. This analysis ultimately lands on the word count problem on the names. Firstly, all other attributes are filtered and only name is chosen. Name can be comprised of more than one word. Therefore, they are split to get all worse within a name and then to perform the main analysis. After splitting, words are grouped uniquely and the number of occurrence of each word is saved along the name in the output file or is printed on the screen.
 
 ## Code Structure
-All the required code and configurations are present in the folder. Configurations folder consists of the script which automatically installs al the packages. There is an additional file which lists down the packages required.
-Code folder of the repository consists of all the files which contain the code and the Twitter Credentials 
+All the required code and configurations are present in the folder. Configurations folder consists of the script which automatically installs al the packages. There is an additional file which lists down the packages required.  
+Code folder of the repository consists of all the files which contain the code and the Twitter Credentials.  
+
 How to proceed:
 1. Clone this git repository in all the machines which will be used for analysis.  
 ```git clone https://github.ncsu.edu/CSC591-DIC/RedOctopusProject```  
