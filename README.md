@@ -1,6 +1,8 @@
 # RedOctopusProject
 
 ## Architecture
+
+![alt text](https://github.ncsu.edu/CSC591-DIC/RedOctopusProject/blob/master/Documents/RedOctopus%20Architecture.png)
 ### Streaming Data from Twitter using Kinesis
 AWS Kinesis is used to stream the data from the Twitter servers using the TwitterAPI. TwitterAPI helps in fetching data from Twitter REST API and helps in streaming data easily. However, the data volume generated and received by the TwitterAPI is not large enough. Therefore, a multi-threaded program helps to generate large volumes of data by replicating the data received from Twitter. A thread retrieves the streaming data from Twitter and places that data in a shared buffer, while the other remaining threads read from the shared buffer and continuously push that data into the AWS Kinesis shards. For interacting with Kinesis boto3 library of Python is used just because of easy semantics it provides.
 
