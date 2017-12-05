@@ -17,9 +17,9 @@ How to proceed:
 7. If table doesn’t exists in DynamoDB create the table by running “create-dynamodb.py”.
 8. To start reading data from Kinesis and storing them persistently by running “shard-dynmodb.py”.
 9. Create EMR Cluster as per the need.
-10. Transfer data from DynamoDB to hadoop in EMR shell by running
+10. Transfer data from DynamoDB to hadoop in EMR shell by running  
       ```hive -f fetch_data.hql```
-11. To run the sample analysis again run it using
+11. To run the sample analysis again run it using  
       ```hive -f hive.hql```
 
 
