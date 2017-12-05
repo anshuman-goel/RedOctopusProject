@@ -40,7 +40,7 @@ How to proceed:
    * awscli  
 
 These can be installed using setup script which is in the Configuration folder. The setup script also makes sure to install python and pip and sets up the environment parameters.  
-3. Update your AWS credentials using aws configure command. Use same AWS credentials on all the machines chosen to move the data to the same DynamoDB location. This can be done by entering “aws configure” command in terminal of the machine and updating the required fields.  
++ 3. Update your AWS credentials using aws configure command. Use same AWS credentials on all the machines chosen to move the data to the same DynamoDB location. This can be done by entering “aws configure” command in terminal of the machine and updating the required fields.  
 4. Create Twitter API. One access key can be used used for for two simultaneously connections. Store the Twitter credentials in the “twitterCreds.py” file which is in the Code folder.  
 5. To create Kinesis stream run Code/create-stream.py using "python Code/create-stream.py" command in the terminal.  
 6. Run Twitter Kinesis to generate data through command line  
