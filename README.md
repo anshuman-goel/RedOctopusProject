@@ -33,7 +33,7 @@ How to proceed:
 1. Clone this git repository in all the machines which will be used for analysis.  
 ```git clone https://github.ncsu.edu/CSC591-DIC/RedOctopusProject```  
 2. Install all the requirements.  
-+*Boto3  
++* Boto3  
 +*Twitter API  
 +*HTTP  
 +*Twitter  
