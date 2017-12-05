@@ -26,7 +26,8 @@ After transferring the data from DynamoDB to HDFS, data is replicated to increas
 The application developed was restricted to perform only simple analysis on data. The application searches for the most common name that is found among all the users who tweets. This analysis ultimately lands on the word count problem on the names. Firstly, all other attributes are filtered and only name is chosen. Name can be comprised of more than one word. Therefore, they are split to get all worse within a name and then to perform the main analysis. After splitting, words are grouped uniquely and the number of occurrence of each word is saved along the name in the output file or is printed on the screen.
 
 ## Code Structure
-
+All the required code and configurations are present in the folder. Configurations folder consists of the script which automatically installs al the packages. There is an additional file which lists down the packages required.
+Code folder of the repository consists of all the files which contain the code and the Twitter Credentials 
 How to proceed:
 1. Clone this git repository in all the machines which will be used for analysis.  
 ```git clone https://github.ncsu.edu/CSC591-DIC/RedOctopusProject```  
@@ -37,18 +38,18 @@ How to proceed:
    * Twitter  
    * awscli  
 
-These can be installed using setup script. The setup script also makes sure to install python and pip and sets up the environment       parameters.  
+These can be installed using setup script which is in the Configuration folder. The setup script also makes sure to install python and pip and sets up the environment parameters.  
 3. Update your AWS credentials using aws configure command. Use same AWS credentials on all the machines chosen to move the data to the same DynamoDB location. This can be done by entering “aws configure” command in terminal of the machine and updating the required fields.  
-4. Create Twitter API. One access key can be used used for for two simultaneously connections. Store the Twitter credentials in the “twitterCreds.py” file.  
-5. To create Kinesis stream run “create-stream.py”.  
+4. Create Twitter API. One access key can be used used for for two simultaneously connections. Store the Twitter credentials in the “twitterCreds.py” file which is in the Code folder.  
+5. To create Kinesis stream run Code/create-stream.py using "python Code/create-stream.py" command in the terminal.  
 6. Run Twitter Kinesis to generate data through command line  
-    ```python twitter-kinesis.py <num_threads> <shard_id>```  
-7. If table doesn’t exists in DynamoDB create the table by running “create-dynamodb.py”.  
-8. To start reading data from Kinesis and storing them persistently by running “shard-dynmodb.py”.  
+    ```python Code/twitter-kinesis.py <num_threads> <shard_id>```  
+7. If table doesn’t exists in DynamoDB create the table by running create-dynamodb.py by using "python Code/create-dynamodb.py" command in terminal.  
+8. To start reading data from Kinesis and storing them persistently by running shard-dynmodb.py by using "python Code/shard-dynmodb.py" comman in terminal.  
 9. Create EMR Cluster as per the need.  
 10. Transfer data from DynamoDB to hadoop in EMR shell by running  
-      ```hive -f fetch_data.hql```  
+      ```hive -f Code/fetch_data.hql```  
 11. To run the sample analysis again run it using  
-      ```hive -f hive.hql```
+      ```hive -f Code/hive.hql```
 
 
