@@ -1,4 +1,4 @@
- # RedOctopusProject
+  # RedOctopusProject
 
 How to proceed:
 1. Clone this git repository in all the machines which will be used for analysis.  
@@ -20,7 +20,7 @@ These can be installed using setup script. The setup script also makes sure to i
 8. To start reading data from Kinesis and storing them persistently by running “shard-dynmodb.py”.  
 9. Create EMR Cluster as per the need.  
 10. Transfer data from DynamoDB to hadoop in EMR shell by running  
-      ```hive -f fetch_data.hql```
+      ```hive -f fetch_data.hql```  
 11. To run the sample analysis again run it using  
       ```hive -f hive.hql```
 
